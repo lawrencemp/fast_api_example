@@ -5,7 +5,7 @@ from Utilities.segment_db_reader import Price
 
 app = FastAPI()
 
-@app.get("/price_segments")
+@app.get("/top_laptops/price_segments")
 async def get_price_segments():
     prices = Price.get_price_segments()
     if prices is None:
@@ -16,7 +16,7 @@ async def get_price_segments():
     return prices
 
 
-@app.get("/top_laptop/{price_segment_id}")
+@app.get("/top_laptops/{price_segment_id}")
 async def get_top_laptop(price_segment_id: int):
       price_segment = Price.get_price_segment(price_segment_id)
       if price_segment is None:
@@ -26,5 +26,6 @@ async def get_top_laptop(price_segment_id: int):
           )
       laptop = Laptop(price_segment_id)
       return laptop
+
 
 
